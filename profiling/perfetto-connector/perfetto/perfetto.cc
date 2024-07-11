@@ -49250,7 +49250,7 @@ class TracePacket;
 // ReadNextTracePacket() below.
 class TraceBuffer {
  public:
-  static constexpr size_t InlineChunkHeaderSize = sizeof(ChunkRecord);  // For test/fake_packet.{cc,h}.
+  static const size_t InlineChunkHeaderSize = sizeof(ChunkRecord);  // For test/fake_packet.{cc,h}.
 
   // See comment in the header above.
   enum OverwritePolicy { kOverwrite, kDiscard };
@@ -49830,7 +49830,7 @@ constexpr uint8_t kChunkNeedsPatching =
 }  // namespace.
 
 constexpr size_t TraceBuffer::ChunkRecord::kMaxSize;
-constexpr size_t TraceBuffer::InlineChunkHeaderSize = sizeof(ChunkRecord);
+const size_t TraceBuffer::InlineChunkHeaderSize;
 
 // static
 std::unique_ptr<TraceBuffer> TraceBuffer::Create(size_t size_in_bytes,
