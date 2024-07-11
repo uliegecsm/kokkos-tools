@@ -2472,7 +2472,7 @@ void InstallCtrCHandler(CtrlCHandlerFunction);
 /*
  * Copyright (C) 2021 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");InlineChunkHeaderSize'
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -49250,7 +49250,7 @@ class TracePacket;
 // ReadNextTracePacket() below.
 class TraceBuffer {
  public:
-  static const size_t InlineChunkHeaderSize;  // For test/fake_packet.{cc,h}.
+  static constexpr size_t InlineChunkHeaderSize = sizeof(ChunkRecord);  // For test/fake_packet.{cc,h}.
 
   // See comment in the header above.
   enum OverwritePolicy { kOverwrite, kDiscard };
