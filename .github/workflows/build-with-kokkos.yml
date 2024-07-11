@@ -15,7 +15,7 @@ jobs:
             compiler: default
           - image: nvidia/cuda:11.0.3-devel-ubuntu20.04
             preset: Cuda
-            compiler: default
+            compiler: {cpp: g++-11, c: gcc-11}
           - image: nvidia/cuda:12.2.0-devel-ubuntu22.04
             preset: Cuda
             compiler: {cpp: g++-12, c: gcc-12}
