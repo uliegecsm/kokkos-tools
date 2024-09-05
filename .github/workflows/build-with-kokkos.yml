@@ -13,7 +13,7 @@ jobs:
           - image: ubuntu:22.04
             preset: OpenMP
             compiler: default
-          - image: nvidia/cuda:11.0.3-devel-ubuntu20.04
+          - image: nvidia/cuda:12.1.0-devel-ubuntu22.04
             preset: Cuda
             compiler: default
           - image: nvidia/cuda:12.2.0-devel-ubuntu22.04
@@ -86,12 +86,14 @@ jobs:
           apt --no-install-recommends --yes install kitware-archive-keyring
           apt policy cmake
 
-      - name: Install CMake, OpenMPI and dtrace
+      - name: Install git, CMake, OpenMPI, PAPI and dtrace
         run: |
           apt --yes --no-install-recommends install \
+            git ca-certificates \
             cmake make \
             libopenmpi-dev \
-            systemtap-sdt-dev
+            systemtap-sdt-dev \
+            libpapi-dev
       - name: Compile and install Kokkos
         working-directory: kokkos
         run: |

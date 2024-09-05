@@ -31,6 +31,8 @@
 #include <algorithm>
 #include <cstring>
 
+#include "utils/demangle.hpp"
+
 #include "kp_core.hpp"
 
 #if USE_MPI
@@ -519,12 +521,20 @@ struct Allocations {
   Allocations() : total_size(0) {}
   void allocate(std::string&& name, const void* ptr, std::uint64_t size,
                 StackNode* frame) {
+    if (ptr == nullptr) {
+      assert(size == 0);
+      return;
+    }
     auto res = alloc_set.emplace(Allocation(std::move(name), ptr, size, frame));
     assert(res.second);
     total_size += size;
   }
   void deallocate(std::string&& name, const void* ptr, std::uint64_t size,
                   StackNode* frame) {
+    if (ptr == nullptr) {
+      assert(size == 0);
+      return;
+    }
     auto key = Allocation(std::move(name), ptr, size, frame);
     auto it  = alloc_set.find(key);
     if (it == alloc_set.end()) {
@@ -741,7 +751,7 @@ struct State {
   }
 
   void begin_frame(const char* name, StackKind kind) {
-    std::string name_str(name);
+    std::string name_str(demangleNameKokkos(name));
     stack_frame = stack_frame->get_child(std::move(name_str), kind);
     stack_frame->begin();
   }
