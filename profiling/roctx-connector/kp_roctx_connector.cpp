@@ -14,7 +14,11 @@
 //
 //@HEADER
 
+#if __has_include(<rocprofiler-sdk-roctx/roctx.h>)
+#include <rocprofiler-sdk-roctx/roctx.h>
+#else
 #include <roctx.h>
+#endif
 
 #include <cstdint>
 #include <iostream>
